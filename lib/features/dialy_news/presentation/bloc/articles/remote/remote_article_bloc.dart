@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,5 +29,19 @@ class RemoteArticleBloc extends Bloc<RemoteArticleEvent, RemoteArticleState> {
     if (dataState is DataFailed) {
       emit(RemoteArticleFailed(dataState.error!));
     }
+  }
+
+  @override
+  void onError(Object error, StackTrace stackTrace) {
+    print('Error from bloc:$error');
+    super.onError(error, stackTrace);
+  }
+
+  @override
+  void onChange(Change<RemoteArticleState> change) {
+    print(
+      'Change Bloc: ${change.currentState}, Next Bloc: ${change.nextState}',
+    );
+    super.onChange(change);
   }
 }

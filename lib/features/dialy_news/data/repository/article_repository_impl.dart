@@ -12,21 +12,20 @@ class ArticleRepositoryImpl implements ArticleRepository {
 
   @override
   Future<DataState<List<ArticleModel>>> getNewsArticles() async {
-    final respsone = await newsApiServices.getArticles(
-      apiKey: apiKey,
-      category: category,
-      country: country,
-    );
     try {
-      if (respsone.response.statusCode == HttpStatus.ok) {
-        return DataSucess(respsone.data);
+      final articleResponse = await newsApiServices.getArticles(
+        apiKey: apiKey,
+        category: category,
+        country: country,
+      );
+      if (articleResponse.response.statusCode == HttpStatus.ok) {
+        return DataSucess(articleResponse.data);
       } else {
         return DataFailed(
           DioException(
-            requestOptions: respsone.response.requestOptions,
-            error: respsone.response.statusMessage,
-            message: respsone.response.statusMessage,
-            response: respsone.response,
+            requestOptions: articleResponse.response.requestOptions,
+            error: articleResponse.response.statusMessage,
+            response: articleResponse.response,
             type: DioExceptionType.badResponse,
           ),
         );

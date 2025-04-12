@@ -5,5 +5,5 @@ sealed class RemoteArticleEvent {
 }
 
 final class RemoteGetArticles extends RemoteArticleEvent {
-  RemoteGetArticles();
+  const RemoteGetArticles();
 }

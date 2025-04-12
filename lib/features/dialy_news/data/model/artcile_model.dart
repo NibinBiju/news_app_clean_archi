@@ -1,27 +1,27 @@
 import 'package:new_app_clean_archi/features/dialy_news/domain/entities/article.dart';
+import 'package:floor/floor.dart';
 
+@Entity(tableName: 'articles', primaryKeys: ['url'])
 class ArticleModel extends ArticleEntity {
-  ArticleModel({
-    int? id,
-    String? author,
-    String? description,
-    String? title,
-    String? url,
-    String? urlToImage,
-    String? publishedAt,
-    String? content,
+  const ArticleModel({
+    super.author,
+    super.title,
+    super.description,
+    super.url,
+    super.urlToImage,
+    super.publishedAt,
+    super.content,
   });
 
-  factory ArticleModel.fromJson(Map<String, dynamic> map) {
+  factory ArticleModel.fromJson(Map<String, dynamic> json) {
     return ArticleModel(
-      id: map['id'] ?? '',
-      author: map['author'] ?? '',
-      content: map['content'] ?? '',
-      description: map['description'] ?? '',
-      publishedAt: map['publishedAt'] ?? '',
-      title: map['title'] ?? '',
-      url: map['url'] ?? '',
-      urlToImage: map['urlToImage'] ?? '',
+      author: json['author'],
+      title: json['title'],
+      description: json['description'],
+      url: json['url'],
+      urlToImage: json['urlToImage'],
+      publishedAt: json['publishedAt'],
+      content: json['content'],
     );
   }
 }
